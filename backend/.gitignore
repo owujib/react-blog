@@ -3,4 +3,5 @@
 # dependencies  
 #ignores the node module
 /node_modules 
+/.env
 

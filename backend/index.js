@@ -1,5 +1,6 @@
 const express = require('express'); //import express
 const mongoose = require('mongoose'); //import mongoose
+require('dotenv').config();
 
 const postRoute = require('./routes/post.routes');
 
@@ -17,10 +18,11 @@ app.use('/api/post', postRoute);
 // });
 
 mongoose
-  .connect('mongodb://127.0.0.1:27017/React', {
+  .connect(process.env.DB_URL, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
   })
-  .then(() => console.log('database is connected'));
+  .then(() => console.log('remote database is connected......'))
+  .catch(err => console.log(err));
 
 app.listen(3000, () => console.log('server is running on port 3000'));

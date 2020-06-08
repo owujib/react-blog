@@ -13,6 +13,9 @@ const postSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
+  updatedAt: {
+    type: Date,
+  },
 });
 
 const Post = mongoose.model('Post', postSchema);
