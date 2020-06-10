@@ -5,9 +5,15 @@ const postSchema = new mongoose.Schema({
     type: String,
     unique: true,
     max: 255,
+    required: [true, 'A post must have a title'],
   },
   description: {
     type: String,
+  },
+  category: {
+    type: String,
+    enum: ['programming', 'sport', 'food', 'travel'],
+    required: [true, 'please select a category'],
   },
   createdAt: {
     type: Date,
@@ -16,6 +22,16 @@ const postSchema = new mongoose.Schema({
   updatedAt: {
     type: Date,
   },
+});
+
+//middleware for post to check if the post has been updated
+postSchema.pre('save', function (next) {
+  if (!this.isModified('title') || this.isNew) next();
+  if (!this.isModified('description') || this.isNew) next();
+
+  this.updatedAt = Date.now();
+  console.log(this.updatedAt);
+  next();
 });
 
 const Post = mongoose.model('Post', postSchema);

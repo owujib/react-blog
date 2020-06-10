@@ -1,36 +1,15 @@
 const express = require('express');
-const Post = require('../models/postModel');
+const postController = require('../controllers/post.controller');
 
 const router = express.Router();
 
 //read data
-router.get('/', async (req, res) => {
-  try {
-    const post = await Post.find();
-    res.status(200).json({
-      results: post.length,
-      post: post,
-    });
-  } catch (err) {
-    console.log(err);
-  }
-});
+router.get('/', postController.getPosts);
 
 //create data
-router.post('/new', async (req, res) => {
-  try {
-    const post = await Post.create(req.body);
-    res.status(201).json({
-      post,
-    });
-  } catch (err) {
-    console.log(err);
-  }
-});
+router.post('/new', postController.createPosts);
 
 //update data
-router.patch('/update-posts', async (req, res) => {
-  res.send('updated');
-});
+router.patch('/update-posts', postController.updatePosts);
 
 module.exports = router;
