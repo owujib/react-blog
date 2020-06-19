@@ -1,7 +1,10 @@
 const express = require('express');
 const postController = require('../controllers/post.controller');
+const authController = require('../controllers/auth.controller');
 
 const router = express.Router();
+
+// router.use(authController.protect);
 
 //read data
 router.get('/', postController.getPosts);

@@ -3,24 +3,21 @@ const Post = require('../models/postModel');
 exports.getPosts = async (req, res, next) => {
   try {
     const post = await Post.find();
-    console.log('👍👍');
-    res.status(200).json({
-      results: post.length,
-      post: post,
-    });
+
+    res.status(200).json(post);
     next();
   } catch (err) {
     next(err);
   }
 };
 
-// exports.midware = (req, res, next) => {
-//   console.log(req.body);
-//   const { title, description } = req.body;
-//   if (!title) res.send('Post must have a tile');
-//   res.status(200).json(req.body);
-//   next();
-// };
+exports.midware = (req, res, next) => {
+  console.log(req.body, 'from middleware');
+  // const { title, description } = req.body;
+  // if (!title) res.send('Post must have a tile');
+  // res.status(200).json(req.body);
+  next();
+};
 
 exports.createPosts = async (req, res, next) => {
   try {

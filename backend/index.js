@@ -1,5 +1,6 @@
 const express = require('express'); //import express
 const mongoose = require('mongoose'); //import mongoose
+const cors = require('cors');
 require('dotenv').config();
 
 const postRoute = require('./routes/post.routes');
@@ -8,6 +9,7 @@ const userRoute = require('./routes/user.routes');
 const app = express(); //initialising express
 
 //middleware
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
