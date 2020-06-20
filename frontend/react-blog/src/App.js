@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import './App.css';
 import NavbarComponent from './components/NavbarComponent';
 import Home from './components/Home';
@@ -14,25 +14,15 @@ class App extends React.Component {
     };
   }
 
-  componentDidMount() {
-    fetch('/api/post')
-      .then(result => result.json())
-      .then(posts => {
-        this.setState({
-          posts,
-        });
-      });
-  }
   render() {
-    console.log(this.state);
+    // console.log(this.state.posts);
     return (
       <div className="container-fluid">
         <NavbarComponent />
 
-        <Route exact path="/" component={Home} />
-        <Route path="/new-post">
-          <CreatePost />
-        </Route>
+        <Route path="/" component={Home} />
+        <Route path="/new-post" component={CreatePost} />
+        <Route path="/blog" component={Blog} />
 
         <footer className="text-light bg-dark mt-5">
           <h1>Footer</h1>

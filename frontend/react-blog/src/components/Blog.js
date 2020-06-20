@@ -1,8 +1,23 @@
 import React, { Component } from 'react';
 import { Media } from 'react-bootstrap';
 
-export class Blog extends Component {
+class Blog extends Component {
+  state = {
+    posts: [],
+  };
+  componentDidMount() {
+    fetch('http://localhost:3000/api/post')
+      .then(result => result.json())
+      .then(posts => {
+        this.setState({
+          posts: posts,
+        });
+      })
+      .catch(err => console.log(err));
+  }
   render() {
+    console.log(this.state.posts);
+
     //   return (
     // <Media>
     //   <img
@@ -23,6 +38,9 @@ export class Blog extends Component {
     return (
       <div>
         <h1></h1>
+        {this.state.posts.map(post => {
+          return <h1>{post.title}</h1>;
+        })}
         <div className="row">
           <div className="col">
             {/* {post.} */}

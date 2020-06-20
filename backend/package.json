@@ -4,7 +4,9 @@
   "description": "a simple introduction to mongo db",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "server": "nodemon index.js ",
+    "client": "cd  ../frontend/react-blog & yarn start",
+    "dev": "concurrently \"npm run server\" \"npm run client\" "
   },
   "author": "",
   "license": "ISC",

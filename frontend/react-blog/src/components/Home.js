@@ -6,7 +6,12 @@ export default class Home extends Component {
     return (
       <div>
         <Jumbotron>
-          <h1>Welcome to my REACT BLOG !😎😎 </h1>
+          <h1>
+            Welcome to my REACT BLOG !
+            <span role="img" aria-label="emoji">
+              😎😎
+            </span>{' '}
+          </h1>
           <p className="lead">
             This is a simple hero unit, a simple jumbotron-style component for
             calling extra attention to featured content or information. Lorem
