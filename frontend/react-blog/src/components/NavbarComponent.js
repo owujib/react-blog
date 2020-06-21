@@ -11,11 +11,17 @@ export default function NavbarComponent() {
         </Navbar.Brand>
         <Nav className="justify-content-end" activeKey="/home">
           <Nav.Item>
-            <Nav to="/post">Post</Nav>
+            <Nav>
+              <Link className="nav-link" to="/blog">
+                Post
+              </Link>
+            </Nav>
           </Nav.Item>
           <Nav.Item>
             <Nav to="/new">
-              <Link to="/new-post">Create Post</Link>
+              <Link className="nav-link" to="/new-post">
+                Create Post
+              </Link>
             </Nav>
           </Nav.Item>
           <Nav.Item>
