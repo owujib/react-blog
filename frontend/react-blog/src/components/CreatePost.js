@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Form } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 
 export class CreatePost extends Component {
   constructor() {
@@ -8,35 +9,43 @@ export class CreatePost extends Component {
       title: '',
       category: '',
       description: '',
+      redirect: false,
     };
   }
 
-  // componentDidMount() {
-  //   fetch('/new', {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify(this.state),
-  //   });
-  // }
+  redirectToTarget = () => {
+    this.props.history.push('/');
+  };
 
   handleSubmit = async e => {
     e.preventDefault();
+    const body = {
+      title: this.state.title,
+      description: this.state.description,
+      category: this.state.category,
+    };
 
     try {
-      const response = await fetch('/new', {
+      await fetch('api/post/new', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(this.state),
+        body: JSON.stringify(body),
       });
+      this.setState({
+        redirect: true,
+      });
+
       console.log(this.state);
+      this.props.addPost(this.state);
     } catch (error) {
       console.log(error);
     }
   };
+
   render() {
     // console.log(this.state);
     return (
-      <div className="container p-3 m-4">
+      <div className="container p-3 ml-5">
         <div className="row">
           <div className="col-md-7">
             <form method="POST" onSubmit={this.handleSubmit}>
@@ -80,6 +89,7 @@ export class CreatePost extends Component {
               <div className="form-group">
                 <button className="BoxShadow btn btn-primary px-4">post</button>
               </div>
+              {this.state.redirect && <Redirect to="/posts" />}
             </form>
           </div>
         </div>
