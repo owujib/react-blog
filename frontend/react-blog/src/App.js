@@ -17,12 +17,12 @@ class App extends React.Component {
   render() {
     // console.log(this.state.posts);
     return (
-      <div className="container-fluid">
+      <div className="">
         <NavbarComponent />
 
-        <Route path="/" component={Home} />
+        <Route exact path="/" component={Home} />
         <Route path="/new-post" component={CreatePost} />
-        <Route path="/blog" component={Blog} />
+        <Route path="/posts" component={Blog} />
 
         <footer className="text-light bg-dark mt-5">
           <h1>Footer</h1>

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { Media } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
+import logo from '../logo.svg';
 
 class Blog extends Component {
   state = {
     posts: [],
   };
   componentDidMount() {
-    fetch('http://localhost:3000/api/post')
+    fetch('/api/post')
       .then(result => result.json())
       .then(posts => {
         this.setState({
@@ -18,52 +19,52 @@ class Blog extends Component {
   render() {
     console.log(this.state.posts);
 
-    //   return (
-    // <Media>
-    //   <img
-    //     width={200}
-    //     height={200}
-    //     className="mr-3"
-    //     src="https://avatars2.githubusercontent.com/u/48925577?s=460&u=2fc049b5e496f912c973bce1b97e28066c26f98c&v=4"
-    //     alt="Generic placeholder"
-    //   />
-    //   <Media.Body>
-    //     <h5>{}</h5>
-    //     <p>{}</p>
-    //   </Media.Body>
-    // </Media>;
-    // //   );
-    // });
-
     return (
       <div>
         <h1></h1>
-        {this.state.posts.map(post => {
-          return <h1>{post.title}</h1>;
-        })}
-        <div className="row">
-          <div className="col">
-            {/* {post.} */}
-            <Media>
-              <img
-                width={200}
-                height={200}
-                className="mr-3"
-                src={`https://avatars2.githubusercontent.com/u/48925577?s=460&u=2fc049b5e496f912c973bce1b97e28066c26f98c&v=4`}
-                alt="Generic placeholder"
-              />
-              <Media.Body>
-                <h5>Media Heading</h5>
-                <p>
-                  Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-                  scelerisque ante sollicitudin commodo. Cras purus odio,
-                  vestibulum in vulputate at, tempus viverra turpis. Fusce
-                  condimentum nunc ac nisi vulputate fringilla. Donec lacinia
-                  congue felis in faucibus.
-                </p>
-              </Media.Body>
-            </Media>
-          </div>
+        {/* <div className="" style={{ display: 'flex', width: '100%' }}> */}
+        <div className="card-list">
+          {this.state.posts.map(post => {
+            return (
+              <div
+                style={{
+                  boxShadow: '2px 2px 10px #ccc',
+                  border: '0px',
+                  borderRadius: '10px',
+                }}
+              >
+                <div>
+                  <Card.Body>
+                    <img
+                      className="img-fluid"
+                      style={{
+                        borderRadius: '10px',
+                        boxShadow: '2px 2px 10px #ccc',
+                      }}
+                      className="mr-3"
+                      // src={`https://avatars2.githubusercontent.com/u/48925577?s=460&u=2fc049b5e496f912c973bce1b97e28066c26f98c&v=4`}
+                      src={logo}
+                      alt="Generic placeholder"
+                    />
+                    <p>
+                      <span
+                        style={{ backgroundColor: '#cae2e9' }}
+                        className="badge m-3 p-1 badge"
+                      >
+                        {post.category}
+                      </span>
+                    </p>
+
+                    <h5>{post.title}</h5>
+                    <p>{post.description.slice(0, 60)}</p>
+                  </Card.Body>
+                  <Card.Footer>
+                    <span>{}</span>
+                  </Card.Footer>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     );

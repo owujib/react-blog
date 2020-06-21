@@ -11,7 +11,7 @@ const app = express(); //initialising express
 //middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/post', postRoute);
 app.use('/api/user', userRoute);
@@ -22,11 +22,11 @@ app.use('/api/user', userRoute);
 // });
 
 mongoose
-  .connect(process.env.DB_URL, {
+  .connect('mongodb://127.0.0.1:27017/reactdb', {
     useUnifiedTopology: true,
     useNewUrlParser: true,
   })
-  .then(() => console.log('remote database is connected......'))
+  .then(() => console.log('local database is connected......'))
   .catch(err => console.log(err));
 
 app.listen(3000, () => console.log('server is running on port 3000'));
