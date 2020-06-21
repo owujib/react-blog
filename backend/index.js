@@ -22,7 +22,7 @@ app.use('/api/user', userRoute);
 // });
 
 mongoose
-  .connect(process.env.DB_URL, {
+  .connect(process.env.DB_LOCAL, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
   })

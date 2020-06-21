@@ -10,20 +10,34 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      posts: '',
+      posts: [],
     };
   }
 
+  componentDidMount() {
+    fetch('http://localhost:3000/api/post')
+      .then(result => result.json())
+      .then(posts => {
+        this.setState({
+          posts: posts,
+        });
+      })
+      .catch(err => console.log(err));
+  }
+
   render() {
-    // console.log(this.state.posts);
+    const { posts } = this.state;
+
     return (
       <div className="container-fluid">
         <NavbarComponent />
-
-        <Route path="/" component={Home} />
+        <Route exact path="/" component={Home} />
         <Route path="/new-post" component={CreatePost} />
-        <Route path="/blog" component={Blog} />
 
+        <Route
+          path="/blog"
+          render={routerProps => <Blog {...routerProps} posts={posts} />}
+        />
         <footer className="text-light bg-dark mt-5">
           <h1>Footer</h1>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque
