@@ -22,7 +22,7 @@ app.use('/api/user', userRoute);
 // });
 
 mongoose
-  .connect(process.env.DB_LOCAL, {
+  .connect('mongodb://127.0.0.1:27017/reactdb', {
     useUnifiedTopology: true,
     useNewUrlParser: true,
   })
