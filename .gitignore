@@ -1,0 +1,14 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies  
+#ignores the node module
+/node_modules 
+/.env
+
+
+# userSchema.pre('save', function (next) {
+#   if (!this.isModified('password') || this.isNew) return next();
+
+#   this.passwordChangedAt = Date.now() - 1000;
+#   next();
+# });
